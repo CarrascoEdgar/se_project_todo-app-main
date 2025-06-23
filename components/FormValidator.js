@@ -83,6 +83,9 @@ class FormValidator {
   inputList.forEach((input) => {
     hideInputError(formEl, input);
   });
+
+  resetValidation();
+
 };
 }
 
