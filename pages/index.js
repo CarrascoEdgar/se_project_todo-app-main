@@ -1,9 +1,8 @@
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
-import { initialTodos, validationConfig} from "../utils/constants.js";
+import { initialTodos, validationConfig } from "../utils/constants.js";
 import Todo from "../components/Todo.js";
-import FormValidator from '../components/FormValidator.js';
-
+import FormValidator from "../components/FormValidator.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopup = document.querySelector("#add-todo-popup");
@@ -19,7 +18,6 @@ const closeModal = (modal) => {
   modal.classList.remove("popup_visible");
 };
 
-// The logic in this function should all be handled in the Todo class.
 const generateTodo = (data) => {
   const todo = new Todo(data, "#todo-template");
   const todoElement = todo.getView();
@@ -35,10 +33,10 @@ addTodoCloseBtn.addEventListener("click", () => {
   closeModal(addTodoPopup);
 });
 
- const renderTodo = (item) => {
-    const todo = generateTodo(item);
-    todosList.append(todo);
-  }
+const renderTodo = (item) => {
+  const todo = generateTodo(item);
+  todosList.append(todo);
+};
 
 addTodoForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -50,19 +48,18 @@ addTodoForm.addEventListener("submit", (evt) => {
 
   const id = uuidv4();
 
-  const values = {name, date, id};
+  const values = { name, date, id };
   renderTodo(values);
 
-  newTodoValidator.resetValidation();
   closeModal(addTodoPopup);
+  evt.target.reset();
+  newTodoValidator.resetValidation();
 });
 
-
-
 initialTodos.forEach((item) => {
-  renderTodo(item)
+  renderTodo(item);
 });
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
- 
+
 newTodoValidator.enableValidation();
